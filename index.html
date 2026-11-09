@@ -1,0 +1,504 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rida's Baraat Invitation</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Great+Vibes&family=Playfair+Display:wght@400;500;600&display=swap" rel="stylesheet">
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background: #f6eddf;
+    color: #681a27;
+    font-family: 'Playfair Display', serif;
+    min-height: 100vh;
+    overflow-x: hidden;
+}
+
+:root {
+    --maroon: #641725;
+    --deep: #390b16;
+    --gold: #c9a45c;
+    --lightgold: #ead5a1;
+    --ivory: #fff8ec;
+}
+
+/* Background decoration */
+
+body::before {
+    content: "✦";
+    position: fixed;
+    top: 8%;
+    left: 7%;
+    font-size: 35px;
+    color: var(--gold);
+    opacity: .45;
+}
+
+body::after {
+    content: "✦";
+    position: fixed;
+    bottom: 8%;
+    right: 7%;
+    font-size: 35px;
+    color: var(--gold);
+    opacity: .45;
+}
+
+/* Envelope screen */
+
+#envelope-screen {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 25px;
+    text-align: center;
+    background:
+    radial-gradient(circle at center, #8b293b 0%, #4a101e 75%);
+    color: var(--lightgold);
+}
+
+.small-heading {
+    letter-spacing: 5px;
+    font-size: 12px;
+    margin-bottom: 30px;
+    text-transform: uppercase;
+}
+
+.envelope {
+    width: min(320px, 85vw);
+    height: 205px;
+    background: #d9b875;
+    position: relative;
+    cursor: pointer;
+    box-shadow: 0 15px 40px #1b060b;
+    border: 2px solid #f1dca8;
+}
+
+.envelope::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: #7b2031;
+    clip-path: polygon(0 0, 50% 65%, 100% 0);
+    z-index: 3;
+}
+
+.envelope::after {
+    content: "R";
+    font-family: 'Great Vibes', cursive;
+    font-size: 65px;
+    color: var(--gold);
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 4;
+}
+
+.envelope-bottom {
+    position: absolute;
+    inset: 0;
+    background: #8b293b;
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+}
+
+.envelope-label {
+    margin-top: 35px;
+    font-family: 'Great Vibes', cursive;
+    font-size: 34px;
+}
+
+.open-text {
+    margin-top: 18px;
+    font-size: 11px;
+    letter-spacing: 3px;
+    animation: glow 2s infinite;
+}
+
+@keyframes glow {
+    50% { opacity: .4; }
+}
+
+/* Invitation */
+
+#invitation {
+    display: none;
+    min-height: 100vh;
+    padding: 35px 15px;
+    background:
+    linear-gradient(135deg, #f8eddb, #fff9ef, #f2e3c8);
+    animation: appear 1.5s ease;
+}
+
+@keyframes appear {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.invite-card {
+    max-width: 650px;
+    margin: auto;
+    background: var(--ivory);
+    border: 3px double var(--gold);
+    outline: 1px solid #b68a43;
+    outline-offset: 7px;
+    padding: 45px 25px;
+    text-align: center;
+    position: relative;
+    box-shadow: 0 15px 45px #6a28301c;
+}
+
+.corner {
+    position: absolute;
+    color: var(--gold);
+    font-size: 30px;
+}
+
+.top-left { top: 12px; left: 15px; }
+.top-right { top: 12px; right: 15px; }
+.bottom-left { bottom: 12px; left: 15px; }
+.bottom-right { bottom: 12px; right: 15px; }
+
+.ornament {
+    color: var(--gold);
+    font-size: 25px;
+    margin: 15px 0;
+    letter-spacing: 8px;
+}
+
+.invite-top {
+    font-size: 11px;
+    letter-spacing: 4px;
+    color: #8a6532;
+    text-transform: uppercase;
+}
+
+.bismillah {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 24px;
+    margin: 22px 0;
+    color: var(--maroon);
+}
+
+.invite-title {
+    font-family: 'Great Vibes', cursive;
+    font-size: clamp(45px, 10vw, 65px);
+    color: var(--maroon);
+    margin: 15px 0;
+}
+
+.invite-text {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 19px;
+    line-height: 1.8;
+    color: #60423b;
+    margin: 15px auto;
+    max-width: 470px;
+}
+
+.couple {
+    margin: 28px 0;
+}
+
+.bride-name, .groom-name {
+    font-family: 'Great Vibes', cursive;
+    font-size: clamp(42px, 9vw, 62px);
+    color: var(--maroon);
+}
+
+.and {
+    color: var(--gold);
+    font-family: 'Great Vibes', cursive;
+    font-size: 35px;
+    margin: 5px 0;
+}
+
+.event-name {
+    background: var(--maroon);
+    color: var(--lightgold);
+    display: inline-block;
+    padding: 12px 35px;
+    letter-spacing: 4px;
+    font-size: 13px;
+    margin: 15px 0;
+}
+
+.details {
+    margin: 25px 0;
+    color: #55302c;
+    font-family: 'Cormorant Garamond', serif;
+}
+
+.details h3 {
+    color: #987039;
+    font-size: 19px;
+    font-weight: 600;
+    margin-bottom: 8px;
+}
+
+.details p {
+    font-size: 19px;
+    line-height: 1.8;
+}
+
+.divider {
+    width: 65%;
+    margin: 25px auto;
+    border-top: 1px solid var(--gold);
+}
+
+.countdown-title {
+    font-family: 'Great Vibes', cursive;
+    font-size: 34px;
+    color: var(--maroon);
+    margin-bottom: 15px;
+}
+
+.countdown {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+.time-box {
+    background: var(--maroon);
+    color: var(--lightgold);
+    min-width: 65px;
+    padding: 12px 8px;
+}
+
+.time-box span {
+    display: block;
+    font-size: 25px;
+}
+
+.time-box small {
+    font-size: 9px;
+    letter-spacing: 1px;
+}
+
+.map-button {
+    display: inline-block;
+    margin: 20px 0;
+    padding: 13px 28px;
+    background: var(--maroon);
+    color: var(--lightgold);
+    text-decoration: none;
+    letter-spacing: 2px;
+    font-size: 11px;
+    border: 1px solid var(--gold);
+}
+
+.footer {
+    font-family: 'Great Vibes', cursive;
+    font-size: 30px;
+    color: var(--maroon);
+    margin-top: 20px;
+}
+
+@media(max-width: 480px) {
+    .invite-card {
+        padding: 40px 17px;
+    }
+
+    .invite-text {
+        font-size: 17px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<!-- ENVELOPE -->
+
+<section id="envelope-screen">
+
+    <div class="small-heading">A Royal Celebration</div>
+
+    <div class="envelope" onclick="openInvitation()">
+        <div class="envelope-bottom"></div>
+    </div>
+
+    <div class="envelope-label">A Special Invitation</div>
+
+    <div class="open-text">TAP TO OPEN YOUR INVITATION</div>
+
+</section>
+
+<!-- WEDDING INVITATION -->
+
+<section id="invitation">
+
+<div class="invite-card">
+
+    <div class="corner top-left">❧</div>
+    <div class="corner top-right">❧</div>
+    <div class="corner bottom-left">❧</div>
+    <div class="corner bottom-right">❧</div>
+
+    <div class="invite-top">
+        With the blessings of Allah
+    </div>
+
+    <div class="bismillah">
+        بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ
+    </div>
+
+    <div class="ornament">❧ ✦ ❧</div>
+
+    <h1 class="invite-title">Together with our families</h1>
+
+    <p class="invite-text">
+        We joyfully invite you to join us as we celebrate
+        the beginning of our beautiful journey together.
+        Your presence and blessings will make our day
+        even more special.
+    </p>
+
+    <div class="couple">
+
+        <div class="bride-name">Rida</div>
+
+        <div class="and">&</div>
+
+        <div class="groom-name">Groom's Name</div>
+
+    </div>
+
+    <div class="event-name">THE BARAAT</div>
+
+    <div class="ornament">✦ ❧ ✦</div>
+
+    <div class="details">
+
+        <h3>DATE</h3>
+        <p>15 January 2027</p>
+
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="details">
+
+        <h3>TIME</h3>
+        <p>7:00 PM onwards</p>
+
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="details">
+
+        <h3>VENUE</h3>
+        <p>Your Wedding Venue</p>
+        <p>City, Pakistan</p>
+
+        <a class="map-button"
+           href="https://maps.google.com"
+           target="_blank">
+           VIEW LOCATION
+        </a>
+
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="countdown-title">
+        Counting down to forever
+    </div>
+
+    <div class="countdown">
+
+        <div class="time-box">
+            <span id="days">00</span>
+            <small>DAYS</small>
+        </div>
+
+        <div class="time-box">
+            <span id="hours">00</span>
+            <small>HOURS</small>
+        </div>
+
+        <div class="time-box">
+            <span id="minutes">00</span>
+            <small>MINUTES</small>
+        </div>
+
+        <div class="time-box">
+            <span id="seconds">00</span>
+            <small>SECONDS</small>
+        </div>
+
+    </div>
+
+    <div class="ornament">❧ ✦ ❧</div>
+
+    <div class="footer">
+        With love, Rida & Family
+    </div>
+
+</div>
+
+</section>
+
+<script>
+
+function openInvitation() {
+
+    document.getElementById("envelope-screen").style.display = "none";
+
+    document.getElementById("invitation").style.display = "block";
+
+    window.scrollTo(0, 0);
+
+}
+
+// CHANGE THIS TO YOUR ACTUAL BARAAT DATE AND TIME
+// Format: YYYY-MM-DDTHH:MM:SS
+
+const weddingDate = new Date("2027-01-15T19:00:00").getTime();
+
+function updateCountdown() {
+
+    const now = new Date().getTime();
+    const distance = weddingDate - now;
+
+    if (distance <= 0) {
+        document.querySelector(".countdown-title").innerText =
+        "The celebrations have begun!";
+        document.querySelector(".countdown").style.display = "none";
+        return;
+    }
+
+    const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+    const hours = Math.floor((distance / (1000 * 60 * 60)) % 24);
+    const minutes = Math.floor((distance / (1000 * 60)) % 60);
+    const seconds = Math.floor((distance / 1000) % 60);
+
+    document.getElementById("days").innerText = days;
+    document.getElementById("hours").innerText = hours;
+    document.getElementById("minutes").innerText = minutes;
+    document.getElementById("seconds").innerText = seconds;
+
+}
+
+updateCountdown();
+setInterval(updateCountdown, 1000);
+
+</script>
+
+</body>
+</html>
