@@ -6,9 +6,11 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Our Baraat Celebration</title>
 
-<style>
-@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Great+Vibes&family=Montserrat:wght@300;400;500&display=swap');
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Great+Vibes&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
 
+<style>
 :root {
   --wine: #430b18;
   --deep-wine: #21040b;
@@ -16,9 +18,13 @@
   --cream: #f8f0df;
 }
 
-* { box-sizing: border-box; }
+* {
+  box-sizing: border-box;
+}
 
-html { scroll-behavior: smooth; }
+html {
+  scroll-behavior: smooth;
+}
 
 body {
   margin: 0;
@@ -28,18 +34,24 @@ body {
   overflow-x: hidden;
 }
 
-button { font: inherit; }
+button {
+  font: inherit;
+}
 
-/* INTRODUCTION */
+/* =================================
+   OPENING: MAROON VELVET CURTAINS
+================================= */
 
 .intro {
   position: fixed;
   inset: 0;
-  z-index: 20;
-  background: #16050a;
+  z-index: 100;
+  background:
+    radial-gradient(ellipse at center, #541321, #18050a 85%);
   display: flex;
   align-items: center;
   justify-content: center;
+  overflow: hidden;
   transition: opacity 1.5s ease, visibility 1.5s ease;
 }
 
@@ -55,14 +67,27 @@ button { font: inherit; }
   bottom: -3%;
   width: 52%;
   z-index: 1;
+
   background:
-    repeating-linear-gradient(90deg,
-      rgba(0,0,0,.30) 0px,
-      rgba(255,255,255,.07) 10px,
-      rgba(0,0,0,.18) 24px,
-      rgba(0,0,0,.35) 39px),
-    linear-gradient(90deg, #21040b, #741b2c 18%, #4c0c1b 48%, #25040d);
-  box-shadow: inset 0 0 65px rgba(0,0,0,.8), 0 0 35px #000;
+    repeating-linear-gradient(
+      90deg,
+      rgba(0,0,0,.40) 0px,
+      rgba(255,255,255,.08) 9px,
+      rgba(0,0,0,.16) 19px,
+      rgba(0,0,0,.38) 35px
+    ),
+    linear-gradient(
+      90deg,
+      #21040b,
+      #741b2c 18%,
+      #4c0c1b 48%,
+      #25040d
+    );
+
+  box-shadow:
+    inset 0 0 65px rgba(0,0,0,.8),
+    0 0 35px #000;
+
   transition: transform 3s cubic-bezier(.7,0,.2,1);
 }
 
@@ -77,8 +102,13 @@ button { font: inherit; }
   border-left: 2px solid rgba(201,164,94,.45);
 }
 
-.intro.open .curtain.left { transform: translateX(-101%); }
-.intro.open .curtain.right { transform: translateX(101%) scaleX(-1); }
+.intro.open .curtain.left {
+  transform: translateX(-101%);
+}
+
+.intro.open .curtain.right {
+  transform: translateX(101%) scaleX(-1);
+}
 
 .curtain:after {
   content: "";
@@ -91,16 +121,24 @@ button { font: inherit; }
   opacity: .5;
 }
 
+/* IMPORTANT: TEXT ABOVE CURTAINS */
+
 .intro-content {
-  position: relative;
+  position: absolute;
   z-index: 10;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
   text-align: center;
   padding: 25px;
   color: white;
+  visibility: visible;
+  opacity: 1;
 }
 
 .intro-content p {
-  color: var(--gold);
+  color: #e6c98c;
   letter-spacing: 5px;
   text-transform: uppercase;
   font-family: Montserrat, sans-serif;
@@ -113,22 +151,32 @@ button { font: inherit; }
   color: #e6c98c;
   font-weight: 400;
   margin: 12px 0;
+  text-shadow: 0 4px 20px #000;
 }
 
 .open-curtains {
+  position: relative;
+  z-index: 11;
   margin-top: 30px;
-  padding: 14px 28px;
-  border: 1px solid var(--gold);
-  background: rgba(45,5,15,.8);
+  padding: 15px 30px;
+  border: 1px solid #c9a45e;
+  background: linear-gradient(135deg, #5d1425, #27050e);
   color: #f1d9a6;
   letter-spacing: 3px;
   font-family: Montserrat, sans-serif;
   font-size: 11px;
   cursor: pointer;
   text-transform: uppercase;
+  box-shadow: 0 5px 20px #0007;
 }
 
-/* ENVELOPE */
+.open-curtains:hover {
+  background: #7a2435;
+}
+
+/* =================================
+   GOLDEN ENVELOPE
+================================= */
 
 .envelope-screen {
   min-height: 100vh;
@@ -142,9 +190,11 @@ button { font: inherit; }
     radial-gradient(ellipse at center, #69202d 0%, #300914 55%, #16050a 100%);
 }
 
-.envelope-screen.show { display: flex; }
+.envelope-screen.show {
+  display: flex;
+}
 
-.envelope-screen p {
+.envelope-screen > p {
   color: #d7bd87;
   letter-spacing: 4px;
   text-transform: uppercase;
@@ -171,7 +221,8 @@ button { font: inherit; }
 .envelope-front {
   position: absolute;
   inset: 0;
-  background: linear-gradient(145deg,#681626,#350713);
+  background:
+    linear-gradient(145deg,#681626,#350713);
   clip-path: polygon(0 0,50% 55%,100% 0,100% 100%,0 100%);
   border-bottom: 1px solid #c9a45e;
   z-index: 3;
@@ -213,22 +264,29 @@ button { font: inherit; }
   z-index: 1;
 }
 
-.envelope.open .envelope-seal { opacity: 0; }
+.envelope.open .envelope-seal {
+  opacity: 0;
+}
 
-/* GARDEN SCENE */
+/* =================================
+   GARDEN SCENE
+================================= */
 
 .garden {
   display: none;
   min-height: 100vh;
   position: relative;
   overflow: hidden;
+
   background:
     linear-gradient(to bottom,rgba(9,20,12,.12),rgba(9,18,11,.5)),
     url('https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&w=2000&q=90')
     center/cover no-repeat;
 }
 
-.garden.show { display: block; }
+.garden.show {
+  display: block;
+}
 
 .garden-content {
   min-height: 100vh;
@@ -282,7 +340,8 @@ button { font: inherit; }
   animation: fly 15s linear infinite;
 }
 
-.bird:before, .bird:after {
+.bird:before,
+.bird:after {
   content: "";
   position: absolute;
   width: 16px;
@@ -292,11 +351,27 @@ button { font: inherit; }
   top: 2px;
 }
 
-.bird:before { left: 0; transform: rotate(22deg); }
-.bird:after { right: 0; transform: rotate(-22deg); }
+.bird:before {
+  left: 0;
+  transform: rotate(22deg);
+}
 
-.bird:nth-child(2) { top: 35px; animation-delay: 4s; transform: scale(.7); }
-.bird:nth-child(3) { top: 10px; animation-delay: 8s; transform: scale(.9); }
+.bird:after {
+  right: 0;
+  transform: rotate(-22deg);
+}
+
+.bird:nth-child(2) {
+  top: 35px;
+  animation-delay: 4s;
+  transform: scale(.7);
+}
+
+.bird:nth-child(3) {
+  top: 10px;
+  animation-delay: 8s;
+  transform: scale(.9);
+}
 
 @keyframes fly {
   from { left: -50px; }
@@ -341,7 +416,9 @@ button { font: inherit; }
   to { transform: scaleY(1.1); opacity: 1; }
 }
 
-/* SCRATCH CARD */
+/* =================================
+   SCRATCH TO REVEAL DATE
+================================= */
 
 .scratch-section {
   min-height: 100vh;
@@ -368,6 +445,11 @@ button { font: inherit; }
   font-size: 55px;
   color: #e8cb91;
   margin: 12px 0;
+}
+
+.scratch-section > p {
+  color: #f2e5d1;
+  font-size: 17px;
 }
 
 .scratch-card {
@@ -424,7 +506,9 @@ button { font: inherit; }
   letter-spacing: 2px;
 }
 
-/* INVITATION DETAILS */
+/* =================================
+   MAIN WEDDING INVITATION
+================================= */
 
 .invitation {
   padding: 100px 22px;
@@ -440,7 +524,7 @@ button { font: inherit; }
   margin: auto;
   padding: 55px 25px;
   border: 1px solid #c9a45e88;
-  background: rgba(30,5,12,.78);
+  background: rgba(30,5,12,.86);
   box-shadow: 0 20px 55px #0007;
 }
 
@@ -501,29 +585,42 @@ button { font: inherit; }
 }
 
 @media(max-width:600px) {
-  .invitation { background-attachment: scroll; }
-  .garden-content p { font-size: 18px; }
+  .invitation {
+    background-attachment: scroll;
+  }
+
+  .garden-content p {
+    font-size: 18px;
+  }
 }
 </style>
 </head>
 
 <body>
 
-<!-- CURTAIN OPENING -->
+<!-- OPENING CURTAINS -->
+
 <section class="intro" id="intro">
+
   <div class="intro-content">
     <p>A celebration of love</p>
     <h1>You're Invited</h1>
+
     <button class="open-curtains" onclick="openCurtains()">
       Open the curtains
     </button>
   </div>
+
   <div class="curtain left"></div>
   <div class="curtain right"></div>
+
 </section>
 
+
 <!-- ENVELOPE -->
+
 <section class="envelope-screen" id="envelopeScreen">
+
   <p>A special invitation awaits you</p>
 
   <div class="envelope" id="envelope" onclick="openEnvelope()">
@@ -534,10 +631,14 @@ button { font: inherit; }
   </div>
 
   <p>Tap the envelope to open</p>
+
 </section>
 
+
 <!-- GARDEN -->
+
 <section class="garden" id="garden">
+
   <div class="birds">
     <span class="bird"></span>
     <span class="bird"></span>
@@ -545,8 +646,11 @@ button { font: inherit; }
   </div>
 
   <div class="garden-content">
+
     <span class="small">Together with our families</span>
+
     <h2>A beautiful beginning</h2>
+
     <p>Two hearts, one journey, a lifetime of love.</p>
 
     <div class="fountain">
@@ -557,31 +661,50 @@ button { font: inherit; }
     <p style="margin-top:45px;font-size:13px;letter-spacing:3px;">
       PLEASE SCROLL DOWN
     </p>
+
   </div>
+
 </section>
 
-<!-- SCRATCH TO REVEAL -->
+
+<!-- SCRATCH CARD -->
+
 <section class="scratch-section" id="scratch">
+
   <span class="section-label">A date to remember</span>
+
   <h2>Save the Date</h2>
+
   <p>Reveal our special day by gently scratching the heart.</p>
 
   <div class="scratch-card">
+
     <div class="scratch-message">
       <div class="heart">♥</div>
       <h3>15 January 2027</h3>
       <p>OUR BARAAT CELEBRATION</p>
     </div>
+
     <canvas id="scratchCanvas"></canvas>
+
   </div>
 
-  <span class="scratch-hint">USE YOUR FINGER OR MOUSE TO SCRATCH</span>
+  <span class="scratch-hint">
+    USE YOUR FINGER OR MOUSE TO SCRATCH
+  </span>
+
 </section>
 
-<!-- MAIN INVITATION -->
+
+<!-- WEDDING INVITATION -->
+
 <section class="invitation">
+
   <div class="invitation-inner">
-    <span class="section-label">With the blessings of our families</span>
+
+    <span class="section-label">
+      With the blessings of our families
+    </span>
 
     <h2>We joyfully invite you</h2>
 
@@ -601,6 +724,7 @@ button { font: inherit; }
     </p>
 
     <div class="details">
+
       <strong>THE OCCASION</strong>
       <p>BARAAT</p>
 
@@ -612,54 +736,88 @@ button { font: inherit; }
 
       <strong>VENUE</strong>
       <p>Your Wedding Venue<br>City, Pakistan</p>
+
     </div>
 
     <div class="gold-line"></div>
 
     <h2>With love</h2>
+
     <p>We look forward to celebrating with you.</p>
+
   </div>
+
 </section>
+
 
 <footer class="footer">
   MADE WITH LOVE · OUR BARAAT CELEBRATION
 </footer>
 
+
 <script>
+
 /* OPEN CURTAINS */
+
 function openCurtains() {
+
   const intro = document.getElementById('intro');
+
   intro.classList.add('open');
 
   setTimeout(() => {
+
     intro.classList.add('gone');
-    document.getElementById('envelopeScreen').classList.add('show');
+
+    document.getElementById('envelopeScreen')
+      .classList.add('show');
+
   }, 3000);
+
 }
 
+
 /* OPEN ENVELOPE */
+
 let envelopeOpened = false;
 
 function openEnvelope() {
+
   if (envelopeOpened) return;
+
   envelopeOpened = true;
 
   const envelope = document.getElementById('envelope');
+
   envelope.classList.add('open');
 
   setTimeout(() => {
-    document.getElementById('envelopeScreen').style.display = 'none';
-    document.getElementById('garden').classList.add('show');
-    window.scrollTo({top: 0, behavior: 'smooth'});
+
+    document.getElementById('envelopeScreen')
+      .style.display = 'none';
+
+    document.getElementById('garden')
+      .classList.add('show');
+
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    });
+
   }, 1400);
+
 }
 
-/* SCRATCH CARD - WORKS WITH TOUCH AND MOUSE */
+
+/* SCRATCH CARD */
+
 const canvas = document.getElementById('scratchCanvas');
 const ctx = canvas.getContext('2d');
 
 function setupScratchCard() {
+
   const rect = canvas.getBoundingClientRect();
+
   const ratio = window.devicePixelRatio || 1;
 
   canvas.width = rect.width * ratio;
@@ -667,7 +825,10 @@ function setupScratchCard() {
 
   ctx.scale(ratio, ratio);
 
-  const gradient = ctx.createLinearGradient(0, 0, rect.width, rect.height);
+  const gradient = ctx.createLinearGradient(
+    0, 0, rect.width, rect.height
+  );
+
   gradient.addColorStop(0, '#e7d1a0');
   gradient.addColorStop(.35, '#9b7137');
   gradient.addColorStop(.65, '#d8b875');
@@ -677,57 +838,96 @@ function setupScratchCard() {
   ctx.fillRect(0, 0, rect.width, rect.height);
 
   ctx.fillStyle = 'rgba(255,255,255,.15)';
+
   for (let i = 0; i < 100; i++) {
+
     ctx.beginPath();
-    ctx.arc(Math.random() * rect.width, Math.random() * rect.height, 1, 0, Math.PI * 2);
+
+    ctx.arc(
+      Math.random() * rect.width,
+      Math.random() * rect.height,
+      1,
+      0,
+      Math.PI * 2
+    );
+
     ctx.fill();
+
   }
 
   ctx.fillStyle = '#fff0cf';
   ctx.textAlign = 'center';
   ctx.font = '13px Montserrat';
-  ctx.fillText('SCRATCH HERE', rect.width / 2, rect.height / 2);
+
+  ctx.fillText(
+    'SCRATCH HERE',
+    rect.width / 2,
+    rect.height / 2
+  );
+
 }
+
 
 let scratching = false;
 
 function scratch(e) {
+
   if (!scratching) return;
 
   const rect = canvas.getBoundingClientRect();
+
   const x = e.clientX - rect.left;
   const y = e.clientY - rect.top;
 
   ctx.globalCompositeOperation = 'destination-out';
+
   ctx.beginPath();
   ctx.arc(x, y, 23, 0, Math.PI * 2);
   ctx.fill();
 
   checkScratchProgress();
+
 }
 
+
 function checkScratchProgress() {
-  const pixels = ctx.getImageData(0, 0, canvas.width, canvas.height).data;
+
+  const pixels = ctx.getImageData(
+    0, 0, canvas.width, canvas.height
+  ).data;
+
   let cleared = 0;
   let total = 0;
 
   for (let i = 3; i < pixels.length; i += 32) {
+
     total++;
+
     if (pixels[i] < 50) cleared++;
+
   }
 
   if (cleared / total > .45) {
+
     canvas.style.opacity = '0';
+
     setTimeout(() => {
       canvas.style.display = 'none';
     }, 1000);
+
   }
+
 }
 
+
 canvas.addEventListener('pointerdown', (e) => {
+
   scratching = true;
+
   canvas.setPointerCapture(e.pointerId);
+
   scratch(e);
+
 });
 
 canvas.addEventListener('pointermove', scratch);
@@ -741,6 +941,7 @@ canvas.addEventListener('pointercancel', () => {
 });
 
 window.addEventListener('load', setupScratchCard);
+
 </script>
 
 </body>
