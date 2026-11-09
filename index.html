@@ -4,500 +4,742 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Rida's Baraat Invitation</title>
-
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Great+Vibes&family=Playfair+Display:wght@400;500;600&display=swap" rel="stylesheet">
+<title>Our Baraat Celebration</title>
 
 <style>
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-body {
-    background: #f6eddf;
-    color: #681a27;
-    font-family: 'Playfair Display', serif;
-    min-height: 100vh;
-    overflow-x: hidden;
-}
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Great+Vibes&family=Montserrat:wght@300;400;500&display=swap');
 
 :root {
-    --maroon: #641725;
-    --deep: #390b16;
-    --gold: #c9a45c;
-    --lightgold: #ead5a1;
-    --ivory: #fff8ec;
+  --wine: #430b18;
+  --deep-wine: #21040b;
+  --gold: #c9a45e;
+  --cream: #f8f0df;
 }
 
-/* Background decoration */
+* { box-sizing: border-box; }
 
-body::before {
-    content: "✦";
-    position: fixed;
-    top: 8%;
-    left: 7%;
-    font-size: 35px;
-    color: var(--gold);
-    opacity: .45;
+html { scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  background: #18070b;
+  color: var(--cream);
+  font-family: 'Cormorant Garamond', serif;
+  overflow-x: hidden;
 }
 
-body::after {
-    content: "✦";
-    position: fixed;
-    bottom: 8%;
-    right: 7%;
-    font-size: 35px;
-    color: var(--gold);
-    opacity: .45;
+button { font: inherit; }
+
+/* INTRODUCTION */
+
+.intro {
+  position: fixed;
+  inset: 0;
+  z-index: 20;
+  background: #16050a;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 1.5s ease, visibility 1.5s ease;
 }
 
-/* Envelope screen */
-
-#envelope-screen {
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    padding: 25px;
-    text-align: center;
-    background:
-    radial-gradient(circle at center, #8b293b 0%, #4a101e 75%);
-    color: var(--lightgold);
+.intro.gone {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
 }
 
-.small-heading {
-    letter-spacing: 5px;
-    font-size: 12px;
-    margin-bottom: 30px;
-    text-transform: uppercase;
+.curtain {
+  position: absolute;
+  top: -3%;
+  bottom: -3%;
+  width: 52%;
+  z-index: 2;
+  background:
+    repeating-linear-gradient(90deg,
+      rgba(0,0,0,.30) 0px,
+      rgba(255,255,255,.07) 10px,
+      rgba(0,0,0,.18) 24px,
+      rgba(0,0,0,.35) 39px),
+    linear-gradient(90deg, #21040b, #741b2c 18%, #4c0c1b 48%, #25040d);
+  box-shadow: inset 0 0 65px rgba(0,0,0,.8), 0 0 35px #000;
+  transition: transform 3s cubic-bezier(.7,0,.2,1);
+}
+
+.curtain.left {
+  left: 0;
+  border-right: 2px solid rgba(201,164,94,.45);
+}
+
+.curtain.right {
+  right: 0;
+  transform: scaleX(-1);
+  border-left: 2px solid rgba(201,164,94,.45);
+}
+
+.intro.open .curtain.left { transform: translateX(-101%); }
+.intro.open .curtain.right { transform: translateX(101%) scaleX(-1); }
+
+.curtain:after {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 12%;
+  width: 4px;
+  background: linear-gradient(transparent, #c9a45e88, transparent);
+  opacity: .5;
+}
+
+.intro-content {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+  padding: 25px;
+}
+
+.intro-content p {
+  color: var(--gold);
+  letter-spacing: 5px;
+  text-transform: uppercase;
+  font-family: Montserrat, sans-serif;
+  font-size: 11px;
+}
+
+.intro-content h1 {
+  font-family: 'Great Vibes', cursive;
+  font-size: clamp(45px, 9vw, 85px);
+  color: #e6c98c;
+  font-weight: 400;
+  margin: 12px 0;
+}
+
+.open-curtains {
+  margin-top: 30px;
+  padding: 14px 28px;
+  border: 1px solid var(--gold);
+  background: rgba(45,5,15,.8);
+  color: #f1d9a6;
+  letter-spacing: 3px;
+  font-family: Montserrat, sans-serif;
+  font-size: 11px;
+  cursor: pointer;
+  text-transform: uppercase;
+}
+
+/* ENVELOPE */
+
+.envelope-screen {
+  min-height: 100vh;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  padding: 35px 15px;
+  text-align: center;
+  background:
+    radial-gradient(ellipse at center, #69202d 0%, #300914 55%, #16050a 100%);
+}
+
+.envelope-screen.show { display: flex; }
+
+.envelope-screen p {
+  color: #d7bd87;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  font: 11px Montserrat, sans-serif;
 }
 
 .envelope {
-    width: min(320px, 85vw);
-    height: 205px;
-    background: #d9b875;
-    position: relative;
-    cursor: pointer;
-    box-shadow: 0 15px 40px #1b060b;
-    border: 2px solid #f1dca8;
+  position: relative;
+  width: min(330px, 85vw);
+  height: 215px;
+  margin: 45px auto 25px;
+  cursor: pointer;
+  perspective: 900px;
+  filter: drop-shadow(0 20px 25px #0009);
 }
 
-.envelope::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    background: #7b2031;
-    clip-path: polygon(0 0, 50% 65%, 100% 0);
-    z-index: 3;
+.envelope-back {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg,#9a6c35,#d6b16d 45%,#825522);
+  border: 1px solid #e8ce93;
 }
 
-.envelope::after {
-    content: "R";
-    font-family: 'Great Vibes', cursive;
-    font-size: 65px;
-    color: var(--gold);
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    z-index: 4;
+.envelope-front {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(145deg,#681626,#350713);
+  clip-path: polygon(0 0,50% 55%,100% 0,100% 100%,0 100%);
+  border-bottom: 1px solid #c9a45e;
+  z-index: 3;
 }
 
-.envelope-bottom {
-    position: absolute;
-    inset: 0;
-    background: #8b293b;
-    clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+.envelope-flap {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 60%;
+  background: linear-gradient(145deg,#8b2637,#4a0b19);
+  clip-path: polygon(0 0,100% 0,50% 100%);
+  transform-origin: top;
+  transition: transform 1.2s ease;
+  z-index: 4;
 }
 
-.envelope-label {
-    margin-top: 35px;
-    font-family: 'Great Vibes', cursive;
-    font-size: 34px;
+.envelope-seal {
+  position: absolute;
+  z-index: 5;
+  left: 50%;
+  top: 52%;
+  transform: translate(-50%,-50%);
+  width: 55px;
+  height: 55px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 30%,#f4dfaa,#b58b43 60%,#73501e);
+  color: #5a1820;
+  display: grid;
+  place-items: center;
+  font-size: 25px;
+  box-shadow: 0 3px 10px #0007;
+  transition: opacity .5s;
 }
 
-.open-text {
-    margin-top: 18px;
-    font-size: 11px;
-    letter-spacing: 3px;
-    animation: glow 2s infinite;
+.envelope.open .envelope-flap {
+  transform: rotateX(180deg);
+  z-index: 1;
 }
 
-@keyframes glow {
-    50% { opacity: .4; }
+.envelope.open .envelope-seal { opacity: 0; }
+
+/* GARDEN SCENE */
+
+.garden {
+  display: none;
+  min-height: 100vh;
+  position: relative;
+  overflow: hidden;
+  background:
+    linear-gradient(to bottom,rgba(9,20,12,.12),rgba(9,18,11,.5)),
+    url('https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&w=2000&q=90')
+    center/cover no-repeat;
 }
 
-/* Invitation */
+.garden.show { display: block; }
 
-#invitation {
-    display: none;
-    min-height: 100vh;
-    padding: 35px 15px;
-    background:
-    linear-gradient(135deg, #f8eddb, #fff9ef, #f2e3c8);
-    animation: appear 1.5s ease;
+.garden-content {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  text-align: center;
+  padding: 70px 20px;
+  background: linear-gradient(180deg,#0002,#0005);
 }
 
-@keyframes appear {
-    from { opacity: 0; transform: translateY(20px); }
-    to { opacity: 1; transform: translateY(0); }
+.garden-content .small {
+  letter-spacing: 5px;
+  font: 11px Montserrat,sans-serif;
+  text-transform: uppercase;
+  color: #f2dba9;
 }
 
-.invite-card {
-    max-width: 650px;
-    margin: auto;
-    background: var(--ivory);
-    border: 3px double var(--gold);
-    outline: 1px solid #b68a43;
-    outline-offset: 7px;
-    padding: 45px 25px;
-    text-align: center;
-    position: relative;
-    box-shadow: 0 15px 45px #6a28301c;
+.garden-content h2 {
+  font-family: 'Great Vibes', cursive;
+  font-size: clamp(48px,9vw,90px);
+  font-weight: 400;
+  color: #f4dfb1;
+  text-shadow: 0 4px 15px #000;
+  margin: 15px 0;
 }
 
-.corner {
-    position: absolute;
-    color: var(--gold);
-    font-size: 30px;
+.garden-content p {
+  font-size: 21px;
+  color: #fff7e8;
+  text-shadow: 0 2px 8px #000;
 }
 
-.top-left { top: 12px; left: 15px; }
-.top-right { top: 12px; right: 15px; }
-.bottom-left { bottom: 12px; left: 15px; }
-.bottom-right { bottom: 12px; right: 15px; }
+/* Flying birds */
 
-.ornament {
-    color: var(--gold);
-    font-size: 25px;
-    margin: 15px 0;
-    letter-spacing: 8px;
+.birds {
+  position: absolute;
+  top: 17%;
+  left: 0;
+  width: 100%;
+  height: 100px;
+  pointer-events: none;
 }
 
-.invite-top {
-    font-size: 11px;
-    letter-spacing: 4px;
-    color: #8a6532;
-    text-transform: uppercase;
+.bird {
+  position: absolute;
+  width: 28px;
+  height: 12px;
+  opacity: .8;
+  animation: fly 15s linear infinite;
 }
 
-.bismillah {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 24px;
-    margin: 22px 0;
-    color: var(--maroon);
+.bird:before, .bird:after {
+  content: "";
+  position: absolute;
+  width: 16px;
+  height: 8px;
+  border-top: 2px solid #171b14;
+  border-radius: 50%;
+  top: 2px;
 }
 
-.invite-title {
-    font-family: 'Great Vibes', cursive;
-    font-size: clamp(45px, 10vw, 65px);
-    color: var(--maroon);
-    margin: 15px 0;
+.bird:before { left: 0; transform: rotate(22deg); }
+.bird:after { right: 0; transform: rotate(-22deg); }
+
+.bird:nth-child(2) { top: 35px; animation-delay: 4s; transform: scale(.7); }
+.bird:nth-child(3) { top: 10px; animation-delay: 8s; transform: scale(.9); }
+
+@keyframes fly {
+  from { left: -50px; }
+  to { left: 110%; }
 }
 
-.invite-text {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 19px;
-    line-height: 1.8;
-    color: #60423b;
-    margin: 15px auto;
-    max-width: 470px;
+/* Fountain */
+
+.fountain {
+  width: 170px;
+  height: 110px;
+  margin: 30px auto 0;
+  position: relative;
+  opacity: .9;
 }
 
-.couple {
-    margin: 28px 0;
+.fountain .water {
+  position: absolute;
+  bottom: 12px;
+  left: 15px;
+  width: 140px;
+  height: 35px;
+  border-radius: 50%;
+  background: radial-gradient(ellipse,#b8d6cf,#657f76 60%,#263f35);
+  border: 3px solid #c6b28b;
+  box-shadow: 0 8px 15px #0007;
 }
 
-.bride-name, .groom-name {
-    font-family: 'Great Vibes', cursive;
-    font-size: clamp(42px, 9vw, 62px);
-    color: var(--maroon);
+.fountain .stream {
+  position: absolute;
+  bottom: 38px;
+  left: 82px;
+  width: 8px;
+  height: 55px;
+  background: linear-gradient(90deg,#d2e7df,#7da49a,#e4f0e7);
+  border-radius: 50%;
+  animation: water 1.5s ease-in-out infinite alternate;
 }
 
-.and {
-    color: var(--gold);
-    font-family: 'Great Vibes', cursive;
-    font-size: 35px;
-    margin: 5px 0;
+@keyframes water {
+  from { transform: scaleY(.75); opacity: .65; }
+  to { transform: scaleY(1.1); opacity: 1; }
 }
 
-.event-name {
-    background: var(--maroon);
-    color: var(--lightgold);
-    display: inline-block;
-    padding: 12px 35px;
-    letter-spacing: 4px;
-    font-size: 13px;
-    margin: 15px 0;
+/* SCRATCH CARD */
+
+.scratch-section {
+  min-height: 100vh;
+  background:
+    radial-gradient(ellipse at center,#641a2a,#260710 75%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 75px 20px;
+  text-align: center;
+}
+
+.section-label {
+  font: 11px Montserrat,sans-serif;
+  letter-spacing: 4px;
+  color: var(--gold);
+  text-transform: uppercase;
+}
+
+.scratch-section h2 {
+  font-family: 'Great Vibes',cursive;
+  font-weight: 400;
+  font-size: 55px;
+  color: #e8cb91;
+  margin: 12px 0;
+}
+
+.scratch-card {
+  position: relative;
+  width: min(330px,85vw);
+  height: 220px;
+  margin: 25px auto;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 15px 35px #0008;
+  background:
+    radial-gradient(circle at 50% 30%,#fff3d0,#c69d53 45%,#81551e);
+  border: 5px double #f0d9a5;
+}
+
+.scratch-message {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  color: #40101b;
+}
+
+.scratch-message .heart {
+  font-size: 40px;
+}
+
+.scratch-message h3 {
+  font-size: 27px;
+  margin: 5px;
+}
+
+.scratch-message p {
+  font: 11px Montserrat,sans-serif;
+  letter-spacing: 2px;
+  margin: 4px;
+}
+
+#scratchCanvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  touch-action: none;
+  cursor: crosshair;
+  transition: opacity 1s;
+}
+
+.scratch-hint {
+  font: 11px Montserrat,sans-serif;
+  color: #e8d7b4;
+  letter-spacing: 2px;
+}
+
+/* INVITATION DETAILS */
+
+.invitation {
+  padding: 100px 22px;
+  text-align: center;
+  background:
+    linear-gradient(#21060dcc,#21060df0),
+    url('https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=1800&q=85')
+    center/cover fixed;
+}
+
+.invitation-inner {
+  max-width: 720px;
+  margin: auto;
+  padding: 55px 25px;
+  border: 1px solid #c9a45e88;
+  background: rgba(30,5,12,.78);
+  box-shadow: 0 20px 55px #0007;
+}
+
+.invitation h2 {
+  font-family: 'Great Vibes',cursive;
+  font-size: 65px;
+  font-weight: 400;
+  color: #e8cb91;
+  margin: 12px 0;
+}
+
+.invitation .names {
+  font-family: 'Cormorant Garamond',serif;
+  font-size: clamp(36px,7vw,58px);
+  color: #f5e8ce;
+  margin: 20px 0;
+}
+
+.invitation .and {
+  color: var(--gold);
+  font-family: 'Great Vibes',cursive;
+  font-size: 42px;
+}
+
+.invitation p {
+  font-size: 20px;
+  line-height: 1.7;
+  color: #f0e4d0;
+}
+
+.gold-line {
+  width: 90px;
+  height: 1px;
+  background: var(--gold);
+  margin: 30px auto;
 }
 
 .details {
-    margin: 25px 0;
-    color: #55302c;
-    font-family: 'Cormorant Garamond', serif;
+  margin-top: 30px;
+  line-height: 2;
 }
 
-.details h3 {
-    color: #987039;
-    font-size: 19px;
-    font-weight: 600;
-    margin-bottom: 8px;
-}
-
-.details p {
-    font-size: 19px;
-    line-height: 1.8;
-}
-
-.divider {
-    width: 65%;
-    margin: 25px auto;
-    border-top: 1px solid var(--gold);
-}
-
-.countdown-title {
-    font-family: 'Great Vibes', cursive;
-    font-size: 34px;
-    color: var(--maroon);
-    margin-bottom: 15px;
-}
-
-.countdown {
-    display: flex;
-    justify-content: center;
-    gap: 12px;
-    flex-wrap: wrap;
-}
-
-.time-box {
-    background: var(--maroon);
-    color: var(--lightgold);
-    min-width: 65px;
-    padding: 12px 8px;
-}
-
-.time-box span {
-    display: block;
-    font-size: 25px;
-}
-
-.time-box small {
-    font-size: 9px;
-    letter-spacing: 1px;
-}
-
-.map-button {
-    display: inline-block;
-    margin: 20px 0;
-    padding: 13px 28px;
-    background: var(--maroon);
-    color: var(--lightgold);
-    text-decoration: none;
-    letter-spacing: 2px;
-    font-size: 11px;
-    border: 1px solid var(--gold);
+.details strong {
+  display: block;
+  color: #dfbd7c;
+  font: 11px Montserrat,sans-serif;
+  letter-spacing: 3px;
+  margin-top: 25px;
 }
 
 .footer {
-    font-family: 'Great Vibes', cursive;
-    font-size: 30px;
-    color: var(--maroon);
-    margin-top: 20px;
+  padding: 35px 15px;
+  text-align: center;
+  color: #c8a96c;
+  background: #16050a;
+  font: 10px Montserrat,sans-serif;
+  letter-spacing: 3px;
 }
 
-@media(max-width: 480px) {
-    .invite-card {
-        padding: 40px 17px;
-    }
-
-    .invite-text {
-        font-size: 17px;
-    }
+@media(max-width:600px) {
+  .invitation { background-attachment: scroll; }
+  .garden-content p { font-size: 18px; }
 }
 </style>
 </head>
 
 <body>
 
-<!-- ENVELOPE -->
-
-<section id="envelope-screen">
-
-    <div class="small-heading">A Royal Celebration</div>
-
-    <div class="envelope" onclick="openInvitation()">
-        <div class="envelope-bottom"></div>
-    </div>
-
-    <div class="envelope-label">A Special Invitation</div>
-
-    <div class="open-text">TAP TO OPEN YOUR INVITATION</div>
-
+<!-- CURTAIN OPENING -->
+<section class="intro" id="intro">
+  <div class="intro-content">
+    <p>A celebration of love</p>
+    <h1>You're Invited</h1>
+    <button class="open-curtains" onclick="openCurtains()">
+      Open the curtains
+    </button>
+  </div>
+  <div class="curtain left"></div>
+  <div class="curtain right"></div>
 </section>
 
-<!-- WEDDING INVITATION -->
+<!-- ENVELOPE -->
+<section class="envelope-screen" id="envelopeScreen">
+  <p>A special invitation awaits you</p>
 
-<section id="invitation">
+  <div class="envelope" id="envelope" onclick="openEnvelope()">
+    <div class="envelope-back"></div>
+    <div class="envelope-flap"></div>
+    <div class="envelope-front"></div>
+    <div class="envelope-seal">R</div>
+  </div>
 
-<div class="invite-card">
+  <p>Tap the envelope to open</p>
+</section>
 
-    <div class="corner top-left">❧</div>
-    <div class="corner top-right">❧</div>
-    <div class="corner bottom-left">❧</div>
-    <div class="corner bottom-right">❧</div>
+<!-- GARDEN -->
+<section class="garden" id="garden">
+  <div class="birds">
+    <span class="bird"></span>
+    <span class="bird"></span>
+    <span class="bird"></span>
+  </div>
 
-    <div class="invite-top">
-        With the blessings of Allah
+  <div class="garden-content">
+    <span class="small">Together with our families</span>
+    <h2>A beautiful beginning</h2>
+    <p>Two hearts, one journey, a lifetime of love.</p>
+
+    <div class="fountain">
+      <div class="stream"></div>
+      <div class="water"></div>
     </div>
 
-    <div class="bismillah">
-        بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ
+    <p style="margin-top:45px;font-size:13px;letter-spacing:3px;">
+      PLEASE SCROLL DOWN
+    </p>
+  </div>
+</section>
+
+<!-- SCRATCH TO REVEAL -->
+<section class="scratch-section" id="scratch">
+  <span class="section-label">A date to remember</span>
+  <h2>Save the Date</h2>
+  <p>Reveal our special day by gently scratching the heart.</p>
+
+  <div class="scratch-card">
+    <div class="scratch-message">
+      <div class="heart">♥</div>
+      <h3>15 January 2027</h3>
+      <p>OUR BARAAT CELEBRATION</p>
+    </div>
+    <canvas id="scratchCanvas"></canvas>
+  </div>
+
+  <span class="scratch-hint">USE YOUR FINGER OR MOUSE TO SCRATCH</span>
+</section>
+
+<!-- MAIN INVITATION -->
+<section class="invitation">
+  <div class="invitation-inner">
+    <span class="section-label">With the blessings of our families</span>
+
+    <h2>We joyfully invite you</h2>
+
+    <p>To celebrate the beginning of our forever</p>
+
+    <div class="names">
+      Rida
+      <div class="and">&</div>
+      Groom's Name
     </div>
 
-    <div class="ornament">❧ ✦ ❧</div>
+    <div class="gold-line"></div>
 
-    <h1 class="invite-title">Together with our families</h1>
-
-    <p class="invite-text">
-        We joyfully invite you to join us as we celebrate
-        the beginning of our beautiful journey together.
-        Your presence and blessings will make our day
-        even more special.
+    <p>
+      Your presence and blessings will make our special
+      day even more memorable.
     </p>
 
-    <div class="couple">
-
-        <div class="bride-name">Rida</div>
-
-        <div class="and">&</div>
-
-        <div class="groom-name">Groom's Name</div>
-
-    </div>
-
-    <div class="event-name">THE BARAAT</div>
-
-    <div class="ornament">✦ ❧ ✦</div>
-
     <div class="details">
+      <strong>THE OCCASION</strong>
+      <p>BARAAT</p>
 
-        <h3>DATE</h3>
-        <p>15 January 2027</p>
+      <strong>DATE</strong>
+      <p>15 January 2027</p>
 
+      <strong>TIME</strong>
+      <p>7:00 PM</p>
+
+      <strong>VENUE</strong>
+      <p>Your Wedding Venue<br>City, Pakistan</p>
     </div>
 
-    <div class="divider"></div>
+    <div class="gold-line"></div>
 
-    <div class="details">
-
-        <h3>TIME</h3>
-        <p>7:00 PM onwards</p>
-
-    </div>
-
-    <div class="divider"></div>
-
-    <div class="details">
-
-        <h3>VENUE</h3>
-        <p>Your Wedding Venue</p>
-        <p>City, Pakistan</p>
-
-        <a class="map-button"
-           href="https://maps.google.com"
-           target="_blank">
-           VIEW LOCATION
-        </a>
-
-    </div>
-
-    <div class="divider"></div>
-
-    <div class="countdown-title">
-        Counting down to forever
-    </div>
-
-    <div class="countdown">
-
-        <div class="time-box">
-            <span id="days">00</span>
-            <small>DAYS</small>
-        </div>
-
-        <div class="time-box">
-            <span id="hours">00</span>
-            <small>HOURS</small>
-        </div>
-
-        <div class="time-box">
-            <span id="minutes">00</span>
-            <small>MINUTES</small>
-        </div>
-
-        <div class="time-box">
-            <span id="seconds">00</span>
-            <small>SECONDS</small>
-        </div>
-
-    </div>
-
-    <div class="ornament">❧ ✦ ❧</div>
-
-    <div class="footer">
-        With love, Rida & Family
-    </div>
-
-</div>
-
+    <h2>With love</h2>
+    <p>We look forward to celebrating with you.</p>
+  </div>
 </section>
 
+<footer class="footer">
+  MADE WITH LOVE · OUR BARAAT CELEBRATION
+</footer>
+
 <script>
+/* OPEN CURTAINS */
+function openCurtains() {
+  const intro = document.getElementById('intro');
+  intro.classList.add('open');
 
-function openInvitation() {
-
-    document.getElementById("envelope-screen").style.display = "none";
-
-    document.getElementById("invitation").style.display = "block";
-
-    window.scrollTo(0, 0);
-
+  setTimeout(() => {
+    intro.classList.add('gone');
+    document.getElementById('envelopeScreen').classList.add('show');
+  }, 3000);
 }
 
-// CHANGE THIS TO YOUR ACTUAL BARAAT DATE AND TIME
-// Format: YYYY-MM-DDTHH:MM:SS
+/* OPEN ENVELOPE */
+let envelopeOpened = false;
 
-const weddingDate = new Date("2027-01-15T19:00:00").getTime();
+function openEnvelope() {
+  if (envelopeOpened) return;
+  envelopeOpened = true;
 
-function updateCountdown() {
+  const envelope = document.getElementById('envelope');
+  envelope.classList.add('open');
 
-    const now = new Date().getTime();
-    const distance = weddingDate - now;
-
-    if (distance <= 0) {
-        document.querySelector(".countdown-title").innerText =
-        "The celebrations have begun!";
-        document.querySelector(".countdown").style.display = "none";
-        return;
-    }
-
-    const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-    const hours = Math.floor((distance / (1000 * 60 * 60)) % 24);
-    const minutes = Math.floor((distance / (1000 * 60)) % 60);
-    const seconds = Math.floor((distance / 1000) % 60);
-
-    document.getElementById("days").innerText = days;
-    document.getElementById("hours").innerText = hours;
-    document.getElementById("minutes").innerText = minutes;
-    document.getElementById("seconds").innerText = seconds;
-
+  setTimeout(() => {
+    document.getElementById('envelopeScreen').style.display = 'none';
+    document.getElementById('garden').classList.add('show');
+    window.scrollTo({top: 0, behavior: 'smooth'});
+  }, 1400);
 }
 
-updateCountdown();
-setInterval(updateCountdown, 1000);
+/* SCRATCH CARD - WORKS WITH TOUCH AND MOUSE */
+const canvas = document.getElementById('scratchCanvas');
+const ctx = canvas.getContext('2d');
 
+function setupScratchCard() {
+  const rect = canvas.getBoundingClientRect();
+  const ratio = window.devicePixelRatio || 1;
+
+  canvas.width = rect.width * ratio;
+  canvas.height = rect.height * ratio;
+
+  ctx.scale(ratio, ratio);
+
+  const gradient = ctx.createLinearGradient(0, 0, rect.width, rect.height);
+  gradient.addColorStop(0, '#e7d1a0');
+  gradient.addColorStop(.35, '#9b7137');
+  gradient.addColorStop(.65, '#d8b875');
+  gradient.addColorStop(1, '#79501f');
+
+  ctx.fillStyle = gradient;
+  ctx.fillRect(0, 0, rect.width, rect.height);
+
+  ctx.fillStyle = 'rgba(255,255,255,.15)';
+  for (let i = 0; i < 100; i++) {
+    ctx.beginPath();
+    ctx.arc(Math.random() * rect.width, Math.random() * rect.height, 1, 0, Math.PI * 2);
+    ctx.fill();
+  }
+
+  ctx.fillStyle = '#fff0cf';
+  ctx.textAlign = 'center';
+  ctx.font = '13px Montserrat';
+  ctx.fillText('SCRATCH HERE', rect.width / 2, rect.height / 2);
+}
+
+let scratching = false;
+
+function scratch(e) {
+  if (!scratching) return;
+
+  const rect = canvas.getBoundingClientRect();
+  const x = e.clientX - rect.left;
+  const y = e.clientY - rect.top;
+
+  ctx.globalCompositeOperation = 'destination-out';
+  ctx.beginPath();
+  ctx.arc(x, y, 23, 0, Math.PI * 2);
+  ctx.fill();
+
+  checkScratchProgress();
+}
+
+function checkScratchProgress() {
+  const pixels = ctx.getImageData(0, 0, canvas.width, canvas.height).data;
+  let cleared = 0;
+  let total = 0;
+
+  for (let i = 3; i < pixels.length; i += 32) {
+    total++;
+    if (pixels[i] < 50) cleared++;
+  }
+
+  if (cleared / total > .45) {
+    canvas.style.opacity = '0';
+    setTimeout(() => {
+      canvas.style.display = 'none';
+    }, 1000);
+  }
+}
+
+canvas.addEventListener('pointerdown', (e) => {
+  scratching = true;
+  canvas.setPointerCapture(e.pointerId);
+  scratch(e);
+});
+
+canvas.addEventListener('pointermove', scratch);
+
+canvas.addEventListener('pointerup', () => {
+  scratching = false;
+});
+
+canvas.addEventListener('pointercancel', () => {
+  scratching = false;
+});
+
+window.addEventListener('load', setupScratchCard);
 </script>
 
 </body>
