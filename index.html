@@ -1,271 +1,326 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Our Baraat Celebration</title>
+<title>Rida & Fawaz | Wedding Invitation</title>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Great+Vibes&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
 
 <style>
 :root {
   --wine: #430b18;
-  --deep-wine: #21040b;
+  --deep: #19050a;
   --gold: #c9a45e;
   --cream: #f8f0df;
 }
 
-* {
-  box-sizing: border-box;
-}
+* { box-sizing: border-box; }
 
-html {
-  scroll-behavior: smooth;
-}
+html { scroll-behavior: smooth; }
 
 body {
   margin: 0;
-  background: #18070b;
+  background: var(--deep);
   color: var(--cream);
   font-family: 'Cormorant Garamond', serif;
   overflow-x: hidden;
 }
 
-button {
-  font: inherit;
-}
-
 /* =================================
-   OPENING: MAROON VELVET CURTAINS
-================================= */
-
-.intro {
-  position: fixed;
-  inset: 0;
-  z-index: 100;
-  background:
-    radial-gradient(ellipse at center, #541321, #18050a 85%);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  overflow: hidden;
-  transition: opacity 1.5s ease, visibility 1.5s ease;
-}
-
-.intro.gone {
-  opacity: 0;
-  visibility: hidden;
-  pointer-events: none;
-}
-
-.curtain {
-  position: absolute;
-  top: -3%;
-  bottom: -3%;
-  width: 52%;
-  z-index: 1;
-
-  background:
-    repeating-linear-gradient(
-      90deg,
-      rgba(0,0,0,.40) 0px,
-      rgba(255,255,255,.08) 9px,
-      rgba(0,0,0,.16) 19px,
-      rgba(0,0,0,.38) 35px
-    ),
-    linear-gradient(
-      90deg,
-      #21040b,
-      #741b2c 18%,
-      #4c0c1b 48%,
-      #25040d
-    );
-
-  box-shadow:
-    inset 0 0 65px rgba(0,0,0,.8),
-    0 0 35px #000;
-
-  transition: transform 3s cubic-bezier(.7,0,.2,1);
-}
-
-.curtain.left {
-  left: 0;
-  border-right: 2px solid rgba(201,164,94,.45);
-}
-
-.curtain.right {
-  right: 0;
-  transform: scaleX(-1);
-  border-left: 2px solid rgba(201,164,94,.45);
-}
-
-.intro.open .curtain.left {
-  transform: translateX(-101%);
-}
-
-.intro.open .curtain.right {
-  transform: translateX(101%) scaleX(-1);
-}
-
-.curtain:after {
-  content: "";
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  right: 12%;
-  width: 4px;
-  background: linear-gradient(transparent, #c9a45e88, transparent);
-  opacity: .5;
-}
-
-/* IMPORTANT: TEXT ABOVE CURTAINS */
-
-.intro-content {
-  position: absolute;
-  z-index: 10;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 100%;
-  text-align: center;
-  padding: 25px;
-  color: white;
-  visibility: visible;
-  opacity: 1;
-}
-
-.intro-content p {
-  color: #e6c98c;
-  letter-spacing: 5px;
-  text-transform: uppercase;
-  font-family: Montserrat, sans-serif;
-  font-size: 11px;
-}
-
-.intro-content h1 {
-  font-family: 'Great Vibes', cursive;
-  font-size: clamp(45px, 9vw, 85px);
-  color: #e6c98c;
-  font-weight: 400;
-  margin: 12px 0;
-  text-shadow: 0 4px 20px #000;
-}
-
-.open-curtains {
-  position: relative;
-  z-index: 11;
-  margin-top: 30px;
-  padding: 15px 30px;
-  border: 1px solid #c9a45e;
-  background: linear-gradient(135deg, #5d1425, #27050e);
-  color: #f1d9a6;
-  letter-spacing: 3px;
-  font-family: Montserrat, sans-serif;
-  font-size: 11px;
-  cursor: pointer;
-  text-transform: uppercase;
-  box-shadow: 0 5px 20px #0007;
-}
-
-.open-curtains:hover {
-  background: #7a2435;
-}
-
-/* =================================
-   GOLDEN ENVELOPE
+   ENVELOPE OPENING SCREEN
 ================================= */
 
 .envelope-screen {
   min-height: 100vh;
-  display: none;
+  display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  padding: 35px 15px;
+  padding: 30px 15px;
   text-align: center;
+  overflow: hidden;
   background:
-    radial-gradient(ellipse at center, #69202d 0%, #300914 55%, #16050a 100%);
+    radial-gradient(ellipse at 50% 42%, #702536 0%, #3c101c 48%, #16050a 100%);
 }
 
-.envelope-screen.show {
-  display: flex;
-}
-
-.envelope-screen > p {
-  color: #d7bd87;
+.envelope-heading {
+  color: #e5cc9a;
+  font: 11px Montserrat, sans-serif;
   letter-spacing: 4px;
   text-transform: uppercase;
-  font: 11px Montserrat, sans-serif;
+  margin-bottom: 10px;
+}
+
+/* Envelope stage */
+
+.envelope-stage {
+  width: min(370px, 90vw);
+  height: 310px;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  perspective: 1200px;
+  margin: 15px auto;
 }
 
 .envelope {
   position: relative;
-  width: min(330px, 85vw);
-  height: 215px;
-  margin: 45px auto 25px;
+  width: 100%;
+  height: 225px;
   cursor: pointer;
-  perspective: 900px;
-  filter: drop-shadow(0 20px 25px #0009);
+  filter: drop-shadow(0 25px 25px rgba(0,0,0,.55));
+  transform-style: preserve-3d;
 }
+
+/* Back of envelope */
 
 .envelope-back {
   position: absolute;
   inset: 0;
-  background: linear-gradient(135deg,#9a6c35,#d6b16d 45%,#825522);
-  border: 1px solid #e8ce93;
+  z-index: 1;
+  background:
+    linear-gradient(135deg, #d9b978, #a7793e 50%, #e3c88e);
+  border: 1px solid #e8d19b;
+  box-shadow: inset 0 0 20px #69451c55;
 }
+
+/* Inside letter */
+
+.letter {
+  position: absolute;
+  z-index: 2;
+  left: 8%;
+  width: 84%;
+  height: 190px;
+  top: 15px;
+  padding: 22px 10px;
+  background:
+    linear-gradient(135deg,#fff9e9,#ead8b5);
+  color: #541624;
+  box-shadow: 0 3px 15px #0004;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  transition: transform 1.8s cubic-bezier(.2,.7,.2,1);
+}
+
+.letter::before {
+  content: "";
+  position: absolute;
+  inset: 7px;
+  border: 1px solid #b18b50;
+  pointer-events: none;
+}
+
+.letter span {
+  font: 9px Montserrat, sans-serif;
+  letter-spacing: 3px;
+}
+
+.letter h2 {
+  font-family: 'Great Vibes', cursive;
+  font-size: 36px;
+  font-weight: 400;
+  margin: 12px 0;
+}
+
+/* Envelope front pocket */
 
 .envelope-front {
   position: absolute;
   inset: 0;
+  z-index: 4;
   background:
-    linear-gradient(145deg,#681626,#350713);
-  clip-path: polygon(0 0,50% 55%,100% 0,100% 100%,0 100%);
-  border-bottom: 1px solid #c9a45e;
-  z-index: 3;
+    linear-gradient(145deg,#741c30 0%,#4b0d1b 55%,#290711 100%);
+  clip-path: polygon(0 0,50% 57%,100% 0,100% 100%,0 100%);
+  box-shadow: inset 0 -15px 25px #17020866;
 }
+
+/* Paper folds */
+
+.envelope-front::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(32deg,transparent 49.5%,#d8b77b55 50%,transparent 51%),
+    linear-gradient(-32deg,transparent 49.5%,#d8b77b44 50%,transparent 51%);
+}
+
+.envelope-front::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 2px;
+  background: linear-gradient(90deg,transparent,#d9b978,transparent);
+}
+
+/* Flap */
 
 .envelope-flap {
   position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 60%;
-  background: linear-gradient(145deg,#8b2637,#4a0b19);
+  inset: 0 0 auto;
+  height: 65%;
+  z-index: 5;
+  background:
+    linear-gradient(145deg,#86283a,#5c1225 65%,#390916);
   clip-path: polygon(0 0,100% 0,50% 100%);
-  transform-origin: top;
-  transition: transform 1.2s ease;
-  z-index: 4;
+  transform-origin: top center;
+  transition:
+    transform 1.35s cubic-bezier(.4,0,.2,1),
+    filter 1s;
+  backface-visibility: visible;
+  filter: drop-shadow(0 4px 4px #16030966);
 }
 
-.envelope-seal {
+/* Wax seal */
+
+.wax-seal {
   position: absolute;
-  z-index: 5;
+  z-index: 8;
+  width: 73px;
+  height: 73px;
   left: 50%;
-  top: 52%;
+  top: 56%;
   transform: translate(-50%,-50%);
-  width: 55px;
-  height: 55px;
   border-radius: 50%;
-  background: radial-gradient(circle at 35% 30%,#f4dfaa,#b58b43 60%,#73501e);
-  color: #5a1820;
-  display: grid;
-  place-items: center;
-  font-size: 25px;
-  box-shadow: 0 3px 10px #0007;
-  transition: opacity .5s;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #f0c88c;
+  font-family: 'Cormorant Garamond',serif;
+  font-size: 27px;
+  font-weight: 600;
+  letter-spacing: -2px;
+
+  background:
+    radial-gradient(circle at 32% 25%,#a84b51 0%,#761b29 35%,#4c0a19 75%,#26050c 100%);
+
+  border: 2px solid #9e5260;
+
+  box-shadow:
+    inset 0 3px 5px #e68a8a55,
+    inset 0 -5px 8px #20020899,
+    0 5px 12px #0009;
+  transition: opacity .5s, transform .6s;
 }
+
+.wax-seal::before {
+  content: "";
+  position: absolute;
+  inset: 7px;
+  border: 1px solid #d59b7d88;
+  border-radius: 50%;
+}
+
+.wax-seal::after {
+  content: "";
+  position: absolute;
+  inset: -4px;
+  border: 2px solid #7b2935;
+  border-radius: 46% 53% 48% 54%;
+  transform: rotate(18deg);
+}
+
+/* Opening animation */
 
 .envelope.open .envelope-flap {
   transform: rotateX(180deg);
   z-index: 1;
 }
 
-.envelope.open .envelope-seal {
+.envelope.open .wax-seal {
   opacity: 0;
+  transform: translate(-50%,-50%) scale(1.5);
+}
+
+.envelope.open .letter {
+  transform: translateY(-150px);
+  transition-delay: .65s;
+}
+
+.envelope.open .envelope-front {
+  z-index: 4;
+}
+
+/* Instruction */
+
+.tap-instruction {
+  color: #e6d2af;
+  font: 10px Montserrat,sans-serif;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  margin-top: 12px;
+}
+
+/* =================================
+   CORDIALLY INVITED PAGE
+================================= */
+
+.welcome-page {
+  display: none;
+  min-height: 100vh;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  text-align: center;
+  padding: 35px 20px;
+  background:
+    radial-gradient(ellipse at center,#702336,#300914 65%,#16050a);
+  animation: fadeIn 1.5s ease;
+}
+
+.welcome-page.show {
+  display: flex;
+}
+
+.welcome-page .welcome-small {
+  color: #d8bc80;
+  font: 10px Montserrat,sans-serif;
+  letter-spacing: 5px;
+  text-transform: uppercase;
+}
+
+.welcome-page h1 {
+  color: #e8cc94;
+  font-family: 'Great Vibes',cursive;
+  font-size: clamp(52px,10vw,85px);
+  font-weight: 400;
+  margin: 30px 0;
+  text-shadow: 0 5px 15px #0008;
+}
+
+.welcome-page .welcome-names {
+  font-size: clamp(30px,7vw,48px);
+  color: #fff0d6;
+}
+
+.welcome-page .welcome-and {
+  font-family: 'Great Vibes',cursive;
+  color: var(--gold);
+  font-size: 42px;
+}
+
+.continue-button {
+  margin-top: 45px;
+  padding: 15px 32px;
+  background: linear-gradient(135deg,#8b293d,#420b19);
+  border: 1px solid var(--gold);
+  color: #f4dfb1;
+  font: 10px Montserrat,sans-serif;
+  letter-spacing: 3px;
+  cursor: pointer;
+  text-transform: uppercase;
+}
+
+.continue-button:hover {
+  background: #922f43;
 }
 
 /* =================================
@@ -277,16 +332,13 @@ button {
   min-height: 100vh;
   position: relative;
   overflow: hidden;
-
   background:
     linear-gradient(to bottom,rgba(9,20,12,.12),rgba(9,18,11,.5)),
     url('https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&w=2000&q=90')
     center/cover no-repeat;
 }
 
-.garden.show {
-  display: block;
-}
+.garden.show { display: block; }
 
 .garden-content {
   min-height: 100vh;
@@ -307,7 +359,7 @@ button {
 }
 
 .garden-content h2 {
-  font-family: 'Great Vibes', cursive;
+  font-family: 'Great Vibes',cursive;
   font-size: clamp(48px,9vw,90px);
   font-weight: 400;
   color: #f4dfb1;
@@ -320,8 +372,6 @@ button {
   color: #fff7e8;
   text-shadow: 0 2px 8px #000;
 }
-
-/* Flying birds */
 
 .birds {
   position: absolute;
@@ -351,15 +401,8 @@ button {
   top: 2px;
 }
 
-.bird:before {
-  left: 0;
-  transform: rotate(22deg);
-}
-
-.bird:after {
-  right: 0;
-  transform: rotate(-22deg);
-}
+.bird:before { left: 0; transform: rotate(22deg); }
+.bird:after { right: 0; transform: rotate(-22deg); }
 
 .bird:nth-child(2) {
   top: 35px;
@@ -378,52 +421,13 @@ button {
   to { left: 110%; }
 }
 
-/* Fountain */
-
-.fountain {
-  width: 170px;
-  height: 110px;
-  margin: 30px auto 0;
-  position: relative;
-  opacity: .9;
-}
-
-.fountain .water {
-  position: absolute;
-  bottom: 12px;
-  left: 15px;
-  width: 140px;
-  height: 35px;
-  border-radius: 50%;
-  background: radial-gradient(ellipse,#b8d6cf,#657f76 60%,#263f35);
-  border: 3px solid #c6b28b;
-  box-shadow: 0 8px 15px #0007;
-}
-
-.fountain .stream {
-  position: absolute;
-  bottom: 38px;
-  left: 82px;
-  width: 8px;
-  height: 55px;
-  background: linear-gradient(90deg,#d2e7df,#7da49a,#e4f0e7);
-  border-radius: 50%;
-  animation: water 1.5s ease-in-out infinite alternate;
-}
-
-@keyframes water {
-  from { transform: scaleY(.75); opacity: .65; }
-  to { transform: scaleY(1.1); opacity: 1; }
-}
-
 /* =================================
-   SCRATCH TO REVEAL DATE
+   SCRATCH CARD
 ================================= */
 
 .scratch-section {
   min-height: 100vh;
-  background:
-    radial-gradient(ellipse at center,#641a2a,#260710 75%);
+  background: radial-gradient(ellipse at center,#641a2a,#260710 75%);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -460,8 +464,7 @@ button {
   border-radius: 12px;
   overflow: hidden;
   box-shadow: 0 15px 35px #0008;
-  background:
-    radial-gradient(circle at 50% 30%,#fff3d0,#c69d53 45%,#81551e);
+  background: radial-gradient(circle at 50% 30%,#fff3d0,#c69d53 45%,#81551e);
   border: 5px double #f0d9a5;
 }
 
@@ -475,9 +478,7 @@ button {
   color: #40101b;
 }
 
-.scratch-message .heart {
-  font-size: 40px;
-}
+.scratch-message .heart { font-size: 40px; }
 
 .scratch-message h3 {
   font-size: 27px;
@@ -507,7 +508,7 @@ button {
 }
 
 /* =================================
-   MAIN WEDDING INVITATION
+   MAIN INVITATION
 ================================= */
 
 .invitation {
@@ -537,7 +538,6 @@ button {
 }
 
 .invitation .names {
-  font-family: 'Cormorant Garamond',serif;
   font-size: clamp(36px,7vw,58px);
   color: #f5e8ce;
   margin: 20px 0;
@@ -584,53 +584,70 @@ button {
   letter-spacing: 3px;
 }
 
-@media(max-width:600px) {
-  .invitation {
-    background-attachment: scroll;
-  }
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
 
-  .garden-content p {
-    font-size: 18px;
-  }
+@media(max-width:600px) {
+  .invitation { background-attachment: scroll; }
+  .garden-content p { font-size: 18px; }
 }
 </style>
 </head>
 
 <body>
 
-<!-- OPENING CURTAINS -->
-
-<section class="intro" id="intro">
-
-  <div class="intro-content">
-    <p>A celebration of love</p>
-    <h1>You're Invited</h1>
-
-    <button class="open-curtains" onclick="openCurtains()">
-      Open the curtains
-    </button>
-  </div>
-
-  <div class="curtain left"></div>
-  <div class="curtain right"></div>
-
-</section>
-
-
 <!-- ENVELOPE -->
 
 <section class="envelope-screen" id="envelopeScreen">
 
-  <p>A special invitation awaits you</p>
+  <p class="envelope-heading">A special invitation awaits</p>
 
-  <div class="envelope" id="envelope" onclick="openEnvelope()">
-    <div class="envelope-back"></div>
-    <div class="envelope-flap"></div>
-    <div class="envelope-front"></div>
-    <div class="envelope-seal">R</div>
+  <div class="envelope-stage">
+
+    <div class="envelope" id="envelope" onclick="openEnvelope()">
+
+      <div class="envelope-back"></div>
+
+      <div class="letter">
+        
+        <h2>You're Cordially Invited</h2>
+      
+      </div>
+
+      <div class="envelope-front"></div>
+
+      <div class="envelope-flap"></div>
+
+      <div class="wax-seal">R&F</div>
+
+    </div>
+
   </div>
 
-  <p>Tap the envelope to open</p>
+  <p class="tap-instruction">Tap to open</p>
+
+</section>
+
+
+<!-- CORDIALLY INVITED PAGE -->
+
+<section class="welcome-page" id="welcomePage">
+
+
+
+  <h1>You're Cordially Invited</h1>
+
+  <div class="welcome-names">
+    Rida Faiz
+    <div class="welcome-and">&</div>
+    Muhammad Fawaz Qureshi
+  </div>
+
+  <button class="continue-button" onclick="continueToGarden()">
+    Enter our celebration
+  </button>
 
 </section>
 
@@ -652,11 +669,6 @@ button {
     <h2>A beautiful beginning</h2>
 
     <p>Two hearts, one journey, a lifetime of love.</p>
-
-    <div class="fountain">
-      <div class="stream"></div>
-      <div class="water"></div>
-    </div>
 
     <p style="margin-top:45px;font-size:13px;letter-spacing:3px;">
       PLEASE SCROLL DOWN
@@ -711,9 +723,9 @@ button {
     <p>To celebrate the beginning of our forever</p>
 
     <div class="names">
-      Rida
+      Rida Faiz
       <div class="and">&</div>
-      Groom's Name
+      Muhammad Fawaz Qureshi
     </div>
 
     <div class="gold-line"></div>
@@ -727,9 +739,6 @@ button {
 
       <strong>THE OCCASION</strong>
       <p>BARAAT</p>
-
-      <strong>DATE</strong>
-      <p>15 January 2027</p>
 
       <strong>TIME</strong>
       <p>7:00 PM</p>
@@ -751,33 +760,13 @@ button {
 
 
 <footer class="footer">
-  MADE WITH LOVE · OUR BARAAT CELEBRATION
+  MADE WITH LOVE · RIDA & FAWAZ
 </footer>
 
 
 <script>
 
-/* OPEN CURTAINS */
-
-function openCurtains() {
-
-  const intro = document.getElementById('intro');
-
-  intro.classList.add('open');
-
-  setTimeout(() => {
-
-    intro.classList.add('gone');
-
-    document.getElementById('envelopeScreen')
-      .classList.add('show');
-
-  }, 3000);
-
-}
-
-
-/* OPEN ENVELOPE */
+/* ENVELOPE OPENING */
 
 let envelopeOpened = false;
 
@@ -791,20 +780,41 @@ function openEnvelope() {
 
   envelope.classList.add('open');
 
+  // Allow the letter to slide out
+
   setTimeout(() => {
 
     document.getElementById('envelopeScreen')
       .style.display = 'none';
 
-    document.getElementById('garden')
-      .classList.add('show');
+    const welcome = document.getElementById('welcomePage');
+
+    welcome.classList.add('show');
 
     window.scrollTo({
       top: 0,
       behavior: 'smooth'
     });
 
-  }, 1400);
+  }, 2600);
+
+}
+
+
+/* CONTINUE TO GARDEN */
+
+function continueToGarden() {
+
+  document.getElementById('welcomePage')
+    .style.display = 'none';
+
+  document.getElementById('garden')
+    .classList.add('show');
+
+  window.scrollTo({
+    top: 0,
+    behavior: 'smooth'
+  });
 
 }
 
@@ -817,13 +827,12 @@ const ctx = canvas.getContext('2d');
 function setupScratchCard() {
 
   const rect = canvas.getBoundingClientRect();
-
   const ratio = window.devicePixelRatio || 1;
 
   canvas.width = rect.width * ratio;
   canvas.height = rect.height * ratio;
 
-  ctx.scale(ratio, ratio);
+  ctx.setTransform(ratio, 0, 0, ratio, 0, 0);
 
   const gradient = ctx.createLinearGradient(
     0, 0, rect.width, rect.height
@@ -867,8 +876,8 @@ function setupScratchCard() {
 
 }
 
-
 let scratching = false;
+let lastCheck = 0;
 
 function scratch(e) {
 
@@ -885,10 +894,12 @@ function scratch(e) {
   ctx.arc(x, y, 23, 0, Math.PI * 2);
   ctx.fill();
 
-  checkScratchProgress();
+  if (Date.now() - lastCheck > 350) {
+    lastCheck = Date.now();
+    checkScratchProgress();
+  }
 
 }
-
 
 function checkScratchProgress() {
 
@@ -919,13 +930,10 @@ function checkScratchProgress() {
 
 }
 
-
 canvas.addEventListener('pointerdown', (e) => {
 
   scratching = true;
-
   canvas.setPointerCapture(e.pointerId);
-
   scratch(e);
 
 });
